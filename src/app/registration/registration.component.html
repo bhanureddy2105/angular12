@@ -60,7 +60,7 @@
         <!-- Pincode -->
         <mat-form-field appearance="outline" class="input-form-field">
           <mat-label>Enter Pincode</mat-label>
-          <input matInput #input maxlength="6" formControlName="pincode" required>
+          <input matInput #input maxlength="6" formControlName="pincode" (keypress)="numberOnly($event)" required>
           <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
           <mat-error *ngIf="registrationFormGroup.get('pincode').hasError('required')">Required</mat-error>
           <mat-error
