@@ -1,0 +1,73 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <div class="container mat-elevation-z2">
+    <form [formGroup]="registrationFormGroup">
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div class="mat-title">Registration</div>
+        <!-- First Name -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Enter First Name</mat-label>
+          <input matInput formControlName="firstName" required>
+          <mat-error *ngIf="registrationFormGroup.get('firstName').hasError('required')">Required</mat-error>
+          <mat-error *ngIf="registrationFormGroup.get('firstName').hasError('pattern')">Please enter text only
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Last Name -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Enter Last Name</mat-label>
+          <input matInput formControlName="lastName" required>
+          <mat-error *ngIf="registrationFormGroup.get('lastName').hasError('required')">Required</mat-error>
+          <mat-error *ngIf="registrationFormGroup.get('lastName').hasError('pattern')">Please enter text only
+          </mat-error>
+        </mat-form-field>
+
+        <!-- DOB -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Select Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" required formControlName="dob">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          <mat-error *ngIf="registrationFormGroup.get('lastName').hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <!-- Gender -->
+        <mat-radio-group aria-label="Select an option" formControlName="gender" class="input-form-field" required>
+          <mat-radio-button value="male">Male</mat-radio-button> &nbsp;&nbsp;&nbsp;
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+
+        <!-- Marital Status -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Select Marital Status</mat-label>
+          <mat-select formControlName="maritalStatus" required>
+            <mat-option *ngFor="let status of maritalStatus" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="registrationFormGroup.get('lastName').hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <!-- Last Name -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Enter Email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-error *ngIf="registrationFormGroup.get('email').hasError('required')">Required</mat-error>
+          <mat-error *ngIf="registrationFormGroup.get('email').hasError('email')">Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Pincode -->
+        <mat-form-field appearance="outline" class="input-form-field">
+          <mat-label>Enter Pincode</mat-label>
+          <input matInput #input maxlength="6" formControlName="pincode" required>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="registrationFormGroup.get('pincode').hasError('required')">Required</mat-error>
+          <mat-error
+            *ngIf="registrationFormGroup.get('pincode').hasError('minLength') || input.value?.length > 0 ||  input.value?.length < 6">
+            Enter a Valid Pincode</mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>
