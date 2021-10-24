@@ -49,4 +49,8 @@ export class RegistrationComponent implements OnInit {
     return data;
   }
 
+  edit() {
+    this.save = false;
+  }
+
 }
