@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="16px">
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-  <div class="container mat-elevation-z2">
+  <div class="container mat-elevation-z2" *ngIf="!save">
     <form [formGroup]="registrationFormGroup">
       <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
         <div class="mat-title">Registration</div>
@@ -67,7 +67,16 @@
             *ngIf="registrationFormGroup.get('pincode').hasError('minLength') || input.value?.length > 0 ||  input.value?.length < 6">
             Enter a Valid Pincode</mat-error>
         </mat-form-field>
+        <button class="mat-raised-button btn" (click)="saveDetails()" *ngIf="registrationFormGroup?.valid">Save</button>
       </div>
     </form>
+  </div>
+  <div class="container mat-elevation-z2" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center"
+    *ngIf="save">
+    <div class="mat-title">Person Details</div>
+    <div class="mat-subheading-1">Name : {{registrationDetails?.firstName}} {{registrationDetails?.lastName}}</div>
+    <div class="mat-subheading-1">Gender : {{registrationDetails?.gender}}</div>
+    <div class="mat-subheading-1">Email: {{registrationDetails?.email}}</div>
+    <div class="mat-subheading-1">Pincode: {{registrationDetails?.pincode}}</div>
   </div>
 </div>

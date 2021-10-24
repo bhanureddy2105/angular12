@@ -19,6 +19,8 @@ export class RegistrationComponent implements OnInit {
   });
   maritalStatus = ["married", "unmarried"];
   startDate = new Date(1990, 0, 1);
+  save: boolean = false;
+  registrationDetails: any;
   constructor() { }
 
   ngOnInit(): void {
@@ -30,7 +32,21 @@ export class RegistrationComponent implements OnInit {
       return false;
     }
     return true;
+  }
 
+  saveDetails() {
+    this.save = true;
+    const data = {
+      gender: this.registrationFormGroup.get("gender").value,
+      firstName: this.registrationFormGroup.get("firstName").value,
+      lastName: this.registrationFormGroup.get("lastName").value,
+      dob: this.registrationFormGroup.get("dob").value,
+      maritalStatus: this.registrationFormGroup.get("maritalStatus").value,
+      pincode: this.registrationFormGroup.get("pincode").value,
+      email: this.registrationFormGroup.get("email").value,
+    }
+    this.registrationDetails = data;
+    return data;
   }
 
 }
